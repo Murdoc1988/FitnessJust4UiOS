@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    @ObservedObject private var hvm = HomeViewModel()
+    
+    
     var body: some View {
         Text("Homescreen")
         Text("Du bist angemeldet!")

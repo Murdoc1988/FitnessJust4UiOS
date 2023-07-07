@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC335B8A2A585306009BF141 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC335B892A585306009BF141 /* LoadingScreen.swift */; };
+		FC9587D82A52B3EA00139BD4 /* Pflichtenheft_RobertKrautschick_iOS.pdf in Resources */ = {isa = PBXBuildFile; fileRef = FC9587D72A52B3EA00139BD4 /* Pflichtenheft_RobertKrautschick_iOS.pdf */; };
+		FC9587DA2A52B45A00139BD4 /* DiagrammItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9587D92A52B45A00139BD4 /* DiagrammItem.swift */; };
 		FCB8CFD82A4C7784004A6989 /* FitnessJust4UIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8CFD72A4C7784004A6989 /* FitnessJust4UIApp.swift */; };
 		FCB8CFDA2A4C7784004A6989 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8CFD92A4C7784004A6989 /* ContentView.swift */; };
 		FCB8CFDC2A4C7786004A6989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCB8CFDB2A4C7786004A6989 /* Assets.xcassets */; };
@@ -33,6 +36,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FC335B892A585306009BF141 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
+		FC9587D72A52B3EA00139BD4 /* Pflichtenheft_RobertKrautschick_iOS.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Pflichtenheft_RobertKrautschick_iOS.pdf; sourceTree = "<group>"; };
+		FC9587D92A52B45A00139BD4 /* DiagrammItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagrammItem.swift; sourceTree = "<group>"; };
 		FCB8CFD42A4C7784004A6989 /* FitnessJust4U.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessJust4U.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB8CFD72A4C7784004A6989 /* FitnessJust4UIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessJust4UIApp.swift; sourceTree = "<group>"; };
 		FCB8CFD92A4C7784004A6989 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -73,6 +79,7 @@
 		FCB8CFCB2A4C7784004A6989 = {
 			isa = PBXGroup;
 			children = (
+				FC9587D72A52B3EA00139BD4 /* Pflichtenheft_RobertKrautschick_iOS.pdf */,
 				FCB8CFD62A4C7784004A6989 /* FitnessJust4UI */,
 				FCB8CFD52A4C7784004A6989 /* Products */,
 			);
@@ -89,10 +96,10 @@
 		FCB8CFD62A4C7784004A6989 /* FitnessJust4UI */ = {
 			isa = PBXGroup;
 			children = (
-				FCB8CFE52A4C77CF004A6989 /* API */,
-				FCB8CFE82A4C77DE004A6989 /* Model */,
-				FCB8CFEB2A4C77EC004A6989 /* View */,
 				FCB8D00A2A4C77F7004A6989 /* ViewModel */,
+				FCB8CFE82A4C77DE004A6989 /* Model */,
+				FCB8CFE52A4C77CF004A6989 /* API */,
+				FCB8CFEB2A4C77EC004A6989 /* View */,
 				FCB8D0132A4C7811004A6989 /* Class */,
 				FCB8CFD72A4C7784004A6989 /* FitnessJust4UIApp.swift */,
 				FCB8CFD92A4C7784004A6989 /* ContentView.swift */,
@@ -173,6 +180,7 @@
 				FCB8CFF72A4C77EC004A6989 /* SignInWithAppleSwiftUIButton.swift */,
 				FCB8CFF82A4C77EC004A6989 /* SwiftUIView.swift */,
 				FCB8CFF92A4C77EC004A6989 /* HintBubble.swift */,
+				FC9587D92A52B45A00139BD4 /* DiagrammItem.swift */,
 			);
 			path = ViewElements;
 			sourceTree = "<group>";
@@ -189,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				FCB8CFFD2A4C77EC004A6989 /* LogInView.swift */,
+				FC335B892A585306009BF141 /* LoadingScreen.swift */,
 			);
 			path = LogIn;
 			sourceTree = "<group>";
@@ -272,6 +281,7 @@
 			files = (
 				FCB8CFDF2A4C7786004A6989 /* Preview Assets.xcassets in Resources */,
 				FCB8CFDC2A4C7786004A6989 /* Assets.xcassets in Resources */,
+				FC9587D82A52B3EA00139BD4 /* Pflichtenheft_RobertKrautschick_iOS.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,9 +302,11 @@
 				FCB8D0122A4C77F7004A6989 /* StarterViewModel.swift in Sources */,
 				FCB8D0072A4C77EC004A6989 /* HintBubble.swift in Sources */,
 				FCB8CFDA2A4C7784004A6989 /* ContentView.swift in Sources */,
+				FC9587DA2A52B45A00139BD4 /* DiagrammItem.swift in Sources */,
 				FCB8D0002A4C77EC004A6989 /* checkUsernameView.swift in Sources */,
 				FCB8D0012A4C77EC004A6989 /* Reg02View.swift in Sources */,
 				FCB8D0052A4C77EC004A6989 /* SignInWithAppleSwiftUIButton.swift in Sources */,
+				FC335B8A2A585306009BF141 /* LoadingScreen.swift in Sources */,
 				FCB8CFFE2A4C77EC004A6989 /* HomeView.swift in Sources */,
 				FCB8D0022A4C77EC004A6989 /* EntryPoint.swift in Sources */,
 				FCB8D0032A4C77EC004A6989 /* LoginView.swift in Sources */,

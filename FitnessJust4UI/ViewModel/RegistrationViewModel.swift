@@ -320,7 +320,7 @@ class RegistrationViewModel: ObservableObject {
                 self.pwIndicatorLength = 280
             
             case 8...99:
-                self.pwIndicatorLength = 320
+                self.pwIndicatorLength = 300
             
             default:
                 self.pwIndicatorLength = 10
