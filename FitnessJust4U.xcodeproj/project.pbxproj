@@ -40,6 +40,12 @@
 		FCB8D0112A4C77F7004A6989 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8D00D2A4C77F7004A6989 /* RegistrationViewModel.swift */; };
 		FCB8D0122A4C77F7004A6989 /* StarterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8D00E2A4C77F7004A6989 /* StarterViewModel.swift */; };
 		FCB8D0152A4C7811004A6989 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB8D0142A4C7811004A6989 /* Logger.swift */; };
+		FCC803DC2A6E710C009E8B4A /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC803DB2A6E710C009E8B4A /* ProfileView.swift */; };
+		FCC803E02A6E7192009E8B4A /* CategoryRider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC803DF2A6E7192009E8B4A /* CategoryRider.swift */; };
+		FCC803E22A6E78DF009E8B4A /* TextNew.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC803E12A6E78DF009E8B4A /* TextNew.swift */; };
+		FCC803E62A6E7904009E8B4A /* TextEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC803E52A6E7904009E8B4A /* TextEdit.swift */; };
+		FCC803E92A6E7E5D009E8B4A /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC803E82A6E7E5D009E8B4A /* ToggleView.swift */; };
+		FCC803EB2A6E8054009E8B4A /* FrequenzyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC803EA2A6E8054009E8B4A /* FrequenzyView.swift */; };
 		FCCD34F82A653DE500A0C2F3 /* TrainingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD34F72A653DE500A0C2F3 /* TrainingsView.swift */; };
 		FCCD34FA2A653E0200A0C2F3 /* ExerciseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD34F92A653E0200A0C2F3 /* ExerciseView.swift */; };
 		FCCD34FC2A653E1D00A0C2F3 /* RepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCD34FB2A653E1D00A0C2F3 /* RepsView.swift */; };
@@ -81,6 +87,12 @@
 		FCB8D00D2A4C77F7004A6989 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		FCB8D00E2A4C77F7004A6989 /* StarterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarterViewModel.swift; sourceTree = "<group>"; };
 		FCB8D0142A4C7811004A6989 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		FCC803DB2A6E710C009E8B4A /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		FCC803DF2A6E7192009E8B4A /* CategoryRider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRider.swift; sourceTree = "<group>"; };
+		FCC803E12A6E78DF009E8B4A /* TextNew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextNew.swift; sourceTree = "<group>"; };
+		FCC803E52A6E7904009E8B4A /* TextEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEdit.swift; sourceTree = "<group>"; };
+		FCC803E82A6E7E5D009E8B4A /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
+		FCC803EA2A6E8054009E8B4A /* FrequenzyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequenzyView.swift; sourceTree = "<group>"; };
 		FCCD34F72A653DE500A0C2F3 /* TrainingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsView.swift; sourceTree = "<group>"; };
 		FCCD34F92A653E0200A0C2F3 /* ExerciseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseView.swift; sourceTree = "<group>"; };
 		FCCD34FB2A653E1D00A0C2F3 /* RepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsView.swift; sourceTree = "<group>"; };
@@ -167,6 +179,7 @@
 		FCB8CFEB2A4C77EC004A6989 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FCC803DA2A6E70F8009E8B4A /* Profile */,
 				FCCD34F52A653D7100A0C2F3 /* Training */,
 				FCB8CFEC2A4C77EC004A6989 /* Home */,
 				FCB8CFEE2A4C77EC004A6989 /* Registration */,
@@ -252,6 +265,27 @@
 				FCB8D0142A4C7811004A6989 /* Logger.swift */,
 			);
 			path = Class;
+			sourceTree = "<group>";
+		};
+		FCC803DA2A6E70F8009E8B4A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				FCC803DE2A6E7143009E8B4A /* ViewElements */,
+				FCC803DB2A6E710C009E8B4A /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		FCC803DE2A6E7143009E8B4A /* ViewElements */ = {
+			isa = PBXGroup;
+			children = (
+				FCC803DF2A6E7192009E8B4A /* CategoryRider.swift */,
+				FCC803E52A6E7904009E8B4A /* TextEdit.swift */,
+				FCC803E12A6E78DF009E8B4A /* TextNew.swift */,
+				FCC803E82A6E7E5D009E8B4A /* ToggleView.swift */,
+				FCC803EA2A6E8054009E8B4A /* FrequenzyView.swift */,
+			);
+			path = ViewElements;
 			sourceTree = "<group>";
 		};
 		FCCD34F52A653D7100A0C2F3 /* Training */ = {
@@ -351,19 +385,23 @@
 			files = (
 				FC9593692A666D2200D2AE0E /* NEWTraining.swift in Sources */,
 				FCCD34F82A653DE500A0C2F3 /* TrainingsView.swift in Sources */,
+				FCC803E02A6E7192009E8B4A /* CategoryRider.swift in Sources */,
 				FCB8D0062A4C77EC004A6989 /* SwiftUIView.swift in Sources */,
 				FCB8D0102A4C77F7004A6989 /* HomeViewModel.swift in Sources */,
 				FCB8CFFF2A4C77EC004A6989 /* Reg01View.swift in Sources */,
 				FCCD34FA2A653E0200A0C2F3 /* ExerciseView.swift in Sources */,
 				FCB8D0112A4C77F7004A6989 /* RegistrationViewModel.swift in Sources */,
+				FCC803E22A6E78DF009E8B4A /* TextNew.swift in Sources */,
 				FCB8D0152A4C7811004A6989 /* Logger.swift in Sources */,
 				FCB8CFE72A4C77CF004A6989 /* APIManager.swift in Sources */,
 				FCB8CFEA2A4C77DE004A6989 /* HintText.swift in Sources */,
 				FC9593722A667D1D00D2AE0E /* NEWStat.swift in Sources */,
 				FCB8D0122A4C77F7004A6989 /* StarterViewModel.swift in Sources */,
+				FCC803DC2A6E710C009E8B4A /* ProfileView.swift in Sources */,
 				FCB8D0072A4C77EC004A6989 /* HintBubble.swift in Sources */,
 				FC9593702A6678B700D2AE0E /* LEStats.swift in Sources */,
 				FC95936D2A666D3A00D2AE0E /* NEWReps.swift in Sources */,
+				FCC803EB2A6E8054009E8B4A /* FrequenzyView.swift in Sources */,
 				FCB8CFDA2A4C7784004A6989 /* ContentView.swift in Sources */,
 				FC9587DA2A52B45A00139BD4 /* DiagrammItem.swift in Sources */,
 				FCB8D0002A4C77EC004A6989 /* checkUsernameView.swift in Sources */,
@@ -371,7 +409,9 @@
 				FCB8D0052A4C77EC004A6989 /* SignInWithAppleSwiftUIButton.swift in Sources */,
 				FC335B8A2A585306009BF141 /* LoadingScreen.swift in Sources */,
 				FCB8CFFE2A4C77EC004A6989 /* HomeView.swift in Sources */,
+				FCC803E92A6E7E5D009E8B4A /* ToggleView.swift in Sources */,
 				FCB8D0022A4C77EC004A6989 /* EntryPoint.swift in Sources */,
+				FCC803E62A6E7904009E8B4A /* TextEdit.swift in Sources */,
 				FCB8D0032A4C77EC004A6989 /* LoginView.swift in Sources */,
 				FC9593652A666CF800D2AE0E /* LETraining.swift in Sources */,
 				FC9593672A666D1400D2AE0E /* LEReps.swift in Sources */,
