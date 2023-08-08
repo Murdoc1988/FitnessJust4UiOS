@@ -15,6 +15,28 @@ struct HomeView: View {
     
     var body: some View {
         VStack{
+            
+            
+            GeometryReader { geometry in
+                ScrollViewReader { scrollViewProxy in
+                    ScrollView(.horizontal){
+                        HStack(spacing: 10){
+                            ForEach(0..<10, id: \.self) { index in
+                                
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(width: geometry.size.width - 40, height: 200)
+                                    .id(index)
+                                    .padding(8)
+                                
+                            }
+                        }                }
+                    
+                }
+                
+                
+            }
+            
+            /*
             GeometryReader { geometry in
                         ScrollView(.horizontal, showsIndicators: true) {
                             ScrollViewReader { scrollViewProxy in
@@ -44,6 +66,7 @@ struct HomeView: View {
                             currentIndex = 0
                         }
                     }
+            */
             Spacer()
         }
     }

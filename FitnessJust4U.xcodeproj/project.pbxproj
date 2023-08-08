@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		FC335B8A2A585306009BF141 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC335B892A585306009BF141 /* LoadingScreen.swift */; };
+		FC34728C2A8202420030189B /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34728B2A8202420030189B /* ProfileViewModel.swift */; };
+		FC34728E2A8237AC0030189B /* NavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34728D2A8237AC0030189B /* NavigationView.swift */; };
+		FC3472902A8240700030189B /* ToggleSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34728F2A8240700030189B /* ToggleSettingsView.swift */; };
+		FC3472922A8242FB0030189B /* MeasurementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3472912A8242FB0030189B /* MeasurementView.swift */; };
+		FC3472982A82444B0030189B /* NewMesurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3472972A82444B0030189B /* NewMesurement.swift */; };
 		FC9587D82A52B3EA00139BD4 /* Pflichtenheft_RobertKrautschick_iOS.pdf in Resources */ = {isa = PBXBuildFile; fileRef = FC9587D72A52B3EA00139BD4 /* Pflichtenheft_RobertKrautschick_iOS.pdf */; };
 		FC9587DA2A52B45A00139BD4 /* DiagrammItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9587D92A52B45A00139BD4 /* DiagrammItem.swift */; };
 		FC9593652A666CF800D2AE0E /* LETraining.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9593642A666CF800D2AE0E /* LETraining.swift */; };
@@ -54,6 +59,11 @@
 
 /* Begin PBXFileReference section */
 		FC335B892A585306009BF141 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
+		FC34728B2A8202420030189B /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		FC34728D2A8237AC0030189B /* NavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationView.swift; sourceTree = "<group>"; };
+		FC34728F2A8240700030189B /* ToggleSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingsView.swift; sourceTree = "<group>"; };
+		FC3472912A8242FB0030189B /* MeasurementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementView.swift; sourceTree = "<group>"; };
+		FC3472972A82444B0030189B /* NewMesurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMesurement.swift; sourceTree = "<group>"; };
 		FC9587D72A52B3EA00139BD4 /* Pflichtenheft_RobertKrautschick_iOS.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Pflichtenheft_RobertKrautschick_iOS.pdf; sourceTree = "<group>"; };
 		FC9587D92A52B45A00139BD4 /* DiagrammItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagrammItem.swift; sourceTree = "<group>"; };
 		FC9593642A666CF800D2AE0E /* LETraining.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LETraining.swift; sourceTree = "<group>"; };
@@ -110,6 +120,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC3472932A8243FA0030189B /* Measurement */ = {
+			isa = PBXGroup;
+			children = (
+				FC3472942A82441A0030189B /* ViewElements */,
+				FC3472912A8242FB0030189B /* MeasurementView.swift */,
+			);
+			path = Measurement;
+			sourceTree = "<group>";
+		};
+		FC3472942A82441A0030189B /* ViewElements */ = {
+			isa = PBXGroup;
+			children = (
+				FC3472972A82444B0030189B /* NewMesurement.swift */,
+			);
+			path = ViewElements;
+			sourceTree = "<group>";
+		};
 		FC95936E2A66775E00D2AE0E /* ViewElements */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +206,7 @@
 		FCB8CFEB2A4C77EC004A6989 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FC3472932A8243FA0030189B /* Measurement */,
 				FCC803DA2A6E70F8009E8B4A /* Profile */,
 				FCCD34F52A653D7100A0C2F3 /* Training */,
 				FCB8CFEC2A4C77EC004A6989 /* Home */,
@@ -187,6 +215,7 @@
 				FCB8CFF62A4C77EC004A6989 /* ViewElements */,
 				FCB8CFFA2A4C77EC004A6989 /* Dev */,
 				FCB8CFFC2A4C77EC004A6989 /* LogIn */,
+				FC34728D2A8237AC0030189B /* NavigationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,6 +284,7 @@
 				FCB8D00C2A4C77F7004A6989 /* HomeViewModel.swift */,
 				FCB8D00D2A4C77F7004A6989 /* RegistrationViewModel.swift */,
 				FCB8D00E2A4C77F7004A6989 /* StarterViewModel.swift */,
+				FC34728B2A8202420030189B /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -284,6 +314,7 @@
 				FCC803E12A6E78DF009E8B4A /* TextNew.swift */,
 				FCC803E82A6E7E5D009E8B4A /* ToggleView.swift */,
 				FCC803EA2A6E8054009E8B4A /* FrequenzyView.swift */,
+				FC34728F2A8240700030189B /* ToggleSettingsView.swift */,
 			);
 			path = ViewElements;
 			sourceTree = "<group>";
@@ -391,10 +422,12 @@
 				FCB8CFFF2A4C77EC004A6989 /* Reg01View.swift in Sources */,
 				FCCD34FA2A653E0200A0C2F3 /* ExerciseView.swift in Sources */,
 				FCB8D0112A4C77F7004A6989 /* RegistrationViewModel.swift in Sources */,
+				FC3472902A8240700030189B /* ToggleSettingsView.swift in Sources */,
 				FCC803E22A6E78DF009E8B4A /* TextNew.swift in Sources */,
 				FCB8D0152A4C7811004A6989 /* Logger.swift in Sources */,
 				FCB8CFE72A4C77CF004A6989 /* APIManager.swift in Sources */,
 				FCB8CFEA2A4C77DE004A6989 /* HintText.swift in Sources */,
+				FC3472922A8242FB0030189B /* MeasurementView.swift in Sources */,
 				FC9593722A667D1D00D2AE0E /* NEWStat.swift in Sources */,
 				FCB8D0122A4C77F7004A6989 /* StarterViewModel.swift in Sources */,
 				FCC803DC2A6E710C009E8B4A /* ProfileView.swift in Sources */,
@@ -402,14 +435,17 @@
 				FC9593702A6678B700D2AE0E /* LEStats.swift in Sources */,
 				FC95936D2A666D3A00D2AE0E /* NEWReps.swift in Sources */,
 				FCC803EB2A6E8054009E8B4A /* FrequenzyView.swift in Sources */,
+				FC3472982A82444B0030189B /* NewMesurement.swift in Sources */,
 				FCB8CFDA2A4C7784004A6989 /* ContentView.swift in Sources */,
 				FC9587DA2A52B45A00139BD4 /* DiagrammItem.swift in Sources */,
 				FCB8D0002A4C77EC004A6989 /* checkUsernameView.swift in Sources */,
 				FCB8D0012A4C77EC004A6989 /* Reg02View.swift in Sources */,
+				FC34728C2A8202420030189B /* ProfileViewModel.swift in Sources */,
 				FCB8D0052A4C77EC004A6989 /* SignInWithAppleSwiftUIButton.swift in Sources */,
 				FC335B8A2A585306009BF141 /* LoadingScreen.swift in Sources */,
 				FCB8CFFE2A4C77EC004A6989 /* HomeView.swift in Sources */,
 				FCC803E92A6E7E5D009E8B4A /* ToggleView.swift in Sources */,
+				FC34728E2A8237AC0030189B /* NavigationView.swift in Sources */,
 				FCB8D0022A4C77EC004A6989 /* EntryPoint.swift in Sources */,
 				FCC803E62A6E7904009E8B4A /* TextEdit.swift in Sources */,
 				FCB8D0032A4C77EC004A6989 /* LoginView.swift in Sources */,

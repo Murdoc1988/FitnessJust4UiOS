@@ -16,7 +16,8 @@ struct ContentView: View {
         //Reg01View()
         //HomeView()
         //TrainingsView()
-        ProfileView()
+        //ProfileView()
+        NavigationView()
     }
 }
 

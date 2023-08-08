@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct CategoryRider: View {
+    
+    @State var category: String
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
@@ -16,7 +18,7 @@ struct CategoryRider: View {
                     .stroke(Color.deepPurple, lineWidth: 4)
                 )
             
-            Text("Category")
+            Text("\(category)")
                 .foregroundColor(Color.deepPurple)
                 .font(.headline)
                 .padding()
@@ -26,8 +28,10 @@ struct CategoryRider: View {
     }
 }
 
-struct CategoryRider_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryRider()
-    }
-}
+/*
+ struct CategoryRider_Previews: PreviewProvider {
+ static var previews: some View {
+ CategoryRider()
+ }
+ }
+ */

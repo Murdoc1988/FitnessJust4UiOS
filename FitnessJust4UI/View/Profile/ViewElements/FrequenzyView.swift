@@ -9,11 +9,21 @@ import SwiftUI
 
 struct FrequenzyView: View {
     
-    @State private var selectedUnitIndex = 0
-    @State private var selectedValueIndex = 0
+    @State var periodOneUD: String
+    @State var periodTwoUD: String
+    @State var selectedUnitIndex: Int = 0
+    @State var selectedValueIndex: Int = 0
+    
     
     let timeUnits = ["Tag", "Woche", "Monat", "Jahr"]
     let maxValues: [Int] = [31, 52, 12, 10]
+    
+    init(periodOneUD: String, periodTwoUD: String) {
+        self.periodOneUD = periodOneUD
+        self.periodTwoUD = periodTwoUD
+        _selectedUnitIndex = State(initialValue: UserDefaults.standard.integer(forKey: periodOneUD))
+        _selectedValueIndex = State(initialValue: UserDefaults.standard.integer(forKey: periodTwoUD))
+    }
     
     var body: some View {
         
@@ -41,14 +51,22 @@ struct FrequenzyView: View {
         .padding([.trailing, .leading], 40)
         .padding([.top, .bottom], 0)
         .frame(height: 48)
+        .onChange(of: selectedUnitIndex) { newValue in
+                   UserDefaults.standard.set(newValue, forKey: periodOneUD)
+               }
+        .onChange(of: selectedValueIndex) { newValue in
+                   UserDefaults.standard.set(newValue, forKey: periodTwoUD)
+               }
 
         
         
     }
 }
 
-struct FrequenzyView_Previews: PreviewProvider {
-    static var previews: some View {
-        FrequenzyView()
-    }
-}
+/*
+ struct FrequenzyView_Previews: PreviewProvider {
+ static var previews: some View {
+ FrequenzyView()
+ }
+ }
+ */

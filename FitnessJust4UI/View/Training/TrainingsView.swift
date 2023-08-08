@@ -9,17 +9,24 @@ import SwiftUI
 
 struct TrainingsView: View {
     var body: some View {
-        VStack{
-            LETraining()
-            LETraining()
-            LETraining()
-            LETraining()
-            LETraining()
-            LETraining()
-            LETraining()
-            LETraining()
-            NEWTraining()
+        
+        List{
+            VStack{
+                LETraining()
+                LETraining()
+                LETraining()
+                LETraining()
+                LETraining()
+                LETraining()
+                LETraining()
+                LETraining()
+                NEWTraining()
+            }
+            .padding(.top, 0)
+            .padding(.horizontal, 0)
         }
+        .padding(.top, 0)
+        .padding(.horizontal, 0)
     }
 }
 

@@ -1,41 +1,43 @@
 //
-//  TextEdit.swift
+//  NewMesurement.swift
 //  FitnessJust4U
 //
-//  Created by Robert Krautchick on 24.07.23.
+//  Created by Robert Krautchick on 08.08.23.
 //
 
 import SwiftUI
 
-struct TextEdit: View {
+struct NewMesurement: View {
     @State var labelText: String
     @State var userDefault: String
+    @State var unit: String
     @State var inputText: String
     
-    init(labelText: String, userDefault: String) {
-            self.labelText = labelText
-            self.userDefault = userDefault
-            _inputText = State(initialValue: UserDefaults.standard.string(forKey: userDefault) ?? "")
-        }
+    init(labelText: String, userDefault: String, unit: String) {
+        self.labelText = labelText
+        self.userDefault = userDefault
+        self.unit = unit
+        _inputText = State(initialValue: UserDefaults.standard.string(forKey: userDefault) ?? "")
+    }
     
     var body: some View {
         
         VStack{
             HStack{
-                Text("\(labelText):")
+                Text("\(labelText) (in \(unit)):")
                 Spacer()
-                TextField("Name", text: $inputText//, onCommit: {
+                TextField("\(labelText)", text: $inputText//, onCommit: {
                     //UserDefaults.standard.set(inputText, forKey: userDefault)
                 //}
                 )
-                .frame(width: 200.0)
+                .frame(width: 100.0)
                 .textFieldStyle(.roundedBorder)
                 .onChange(of: inputText) { new in
                     UserDefaults.standard.set(new, forKey: userDefault)
                 }
                 
             }
-            .padding([.trailing, .leading], 32)
+            .padding([.trailing, .leading], 8)
             .padding([.top, .bottom], 8)
             
             Divider()
@@ -44,10 +46,3 @@ struct TextEdit: View {
         
     }
 }
-/*
- struct TextEdit_Previews: PreviewProvider {
- static var previews: some View {
- TextEdit()
- }
- }
- */
