@@ -9,18 +9,18 @@ import SwiftUI
 
 struct TrainingsView: View {
     @ObservedObject private var tvm = TrainingsViewModel()
-    @State var trainingsList: [String]
+    //var trainingsList: [Training]
     
-    init(){
-        self.trainingsList = TrainingsViewModel().trainingsList
-    }
+    //init(){
+      //  self.trainingsList = TrainingsViewModel().trainingsList
+    //}
     var body: some View {
         
         NavigationStack{
             List{
-                ForEach(trainingsList, id: \.self) { training in
+                ForEach(tvm.trainingsList, id: \.self) { training in
                     NavigationLink(destination: ExerciseView()) {
-                        LETraining()
+                        LETraining(training: training.tname, exerices: 18, time: 60)
                     }
                     
                 }

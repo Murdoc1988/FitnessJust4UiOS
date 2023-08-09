@@ -781,10 +781,11 @@ class APIManager: ObservableObject {
     
     //MARK: getTraining
     //notTested
+    /*
     func getTraining(username: String, apiToken: String, completion: @escaping(Bool, String, [Training]) -> Void) {
         logging("getTraining API-Call wurde aufgerufen.")
         
-        let urlString = "http://testapi.mediba.me/getTraining.php"
+        let urlString = "https://testapi.mediba.me/getTraining.php"
         
         guard let url = URL(string: urlString) else {
             logging("Ungültige URL: \(urlString)")
@@ -805,13 +806,13 @@ class APIManager: ObservableObject {
             
             request.httpBody = jsonData
             
-            guard let postData = String(data: jsonData, encoding: .utf8) else {
+            guard let getData = String(data: jsonData, encoding: .utf8) else {
                 logging("Fehler bei der Konvertierung der Parameter zu UTF8.")
                 completion(false, "Fehler bei der Konvertierung der Parameter zu UTF8.", [])
                 return
             }
             
-            logging("POST-Daten: \(postData)")
+            logging("GET-Daten: \(getData)")
             
         } catch {
             
@@ -883,6 +884,109 @@ class APIManager: ObservableObject {
         }
         task.resume()
     }
+    */
+    
+    func getTraining(username: String, apiToken: String, completion: @escaping(Bool, String, [Training]) -> Void) {
+        logging("getTraining API-Call wurde aufgerufen.")
+        
+        let baseURL = "https://testapi.mediba.me/getTraining.php"
+        
+        // Create URL Components from baseURL
+        var components = URLComponents(string: baseURL)!
+        
+        // Create query parameters
+        components.queryItems = [
+            URLQueryItem(name: "username", value: username),
+            URLQueryItem(name: "apiToken", value: apiToken)
+        ]
+        
+        // Get final URL with parameters
+        guard let url = components.url else {
+            logging("Ungültige URL: \(baseURL)")
+            completion(false, "Ungültige URL: '\(baseURL)'", [])
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request) { (data, response, error) in
+            self.logging("getTraining-Call wurde ausgeführt.")
+            
+            if let error = error {
+                self.logging("Server hat einen Fehler zurück gegeben: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+                self.logging("API gibt Fehlercode: \(statusCode) zurück")
+                completion(false, "Statuscode: \(statusCode)", [])
+                return
+            }
+            
+            if let data = data {
+                self.logging("(1/3) Server hat Daten übermittelt.")
+                self.logging("(2/3) Daten: \(data.count) Zeichen")
+                
+                if let dataString = String(data: data, encoding: .utf8) {
+                    self.logging("(3/3) Empfangende Daten: \(dataString)")
+                }
+                /*
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                        let success = json["success"] as? Bool,
+                        let error = json["error"] as? String,
+                        let training = json["training"] as? [Training] {
+                        
+                        self.logging("JSON-Daten wurden extrahiert")
+                        completion(success, error, training)
+                    }
+                 */
+                do {
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                        self.logging("JSON erhalten: \(json)")
+                        
+                        if let success = json["success"] as? Bool,
+                           let error = json["error"] as? String,
+                           let trainingArray = json["training"] as? [[String: Any]] {
+                            
+                            var trainings: [Training] = []
+                            for trainingDict in trainingArray {
+                                if let training = Training(json: trainingDict) {
+                                    trainings.append(training) 
+                                } else {
+                                    self.logging("Konnte Training aus JSON nicht erstellen: \(trainingDict)")
+                                }
+                            }
+                            
+                            self.logging("JSON-Daten wurden extrahiert")
+                            completion(success, error, trainings)
+                            
+                        } else {
+                            self.logging("Einige Schlüssel fehlen im JSON oder haben den falschen Datentyp.")
+                        }
+                    } else {
+                        self.logging("Konnte JSON nicht in ein Dictionary konvertieren.")
+                    }
+                } catch {
+                    self.logging("JSON-Daten wurden nicht extrahiert.")
+                    completion(false, error.localizedDescription, [])
+                }
+            } else {
+                self.logging("Server hat keine Daten übermittelt.")
+                completion(false, "Keine Daten empfangen", [])
+            }
+        }
+        
+        task.resume()
+    }
+
+    
+    
     
     //MARK: getExercise
     //notTested

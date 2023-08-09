@@ -7,9 +7,22 @@
 
 import Foundation
 
-struct Training{
+struct Training: Hashable{
     var tid: Int        //ID
     var tname: String   //Name
     var tdesc: String   //Beschreibung
-    var tdate: Date     //Erstelldatum
+    var tdate: String     //Erstelldatum
+    
+    init?(json: [String: Any]) {
+            guard let tid = json["tid"] as? Int,
+                  let tname = json["tname"] as? String,
+                  let tdesc = json["tdesc"] as? String,
+                  let tdate = json["tdate"] as? String // oder String
+            else { return nil }
+            
+            self.tid = tid
+            self.tname = tname
+            self.tdesc = tdesc
+            self.tdate = tdate
+        }
 }
