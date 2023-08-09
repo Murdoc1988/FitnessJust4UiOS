@@ -38,7 +38,7 @@ class APIManager: ObservableObject {
     //TODO: checkUsername(), checkMail() und authUser() zu GET umschreiben!
     
     //MARK: registerUser()
-    //is working
+    //isWorking
     func registerUser(username: String, password: String, email: String, completion: @escaping (Bool, String) -> Void) {
         
         
@@ -202,7 +202,7 @@ class APIManager: ObservableObject {
     }
     
     //MARK: checkUsername()
-    //is working
+    //isWorking
     func checkUsername(username: String, completion: @escaping (Bool, String) -> Void) {
         //Ausgabe zum Debuggen:
         logging("Funktion checkUsername() wurde aufgerufen")
@@ -372,7 +372,7 @@ class APIManager: ObservableObject {
     }
     
     //MARK: checkMail()
-    //isworking
+    //isWorking
     func checkMail(mail: String, completion: @escaping (Bool, String) -> Void) {
         
         //Ausgabe zum Debuggen:
@@ -630,7 +630,7 @@ class APIManager: ObservableObject {
     }
     
     //MARK: authUser()
-    //isworking
+    //isWorking
     func authUser(username: String, password: String, completion: @escaping(Bool, String) -> Void){
         
         logging("API-Call wurde aufgerufen.")
@@ -780,6 +780,7 @@ class APIManager: ObservableObject {
     }
     
     //MARK: getTraining
+    //notTested
     func getTraining(username: String, apiToken: String, completion: @escaping(Bool, String, [Training]) -> Void) {
         logging("getTraining API-Call wurde aufgerufen.")
         
@@ -883,4 +884,216 @@ class APIManager: ObservableObject {
         task.resume()
     }
     
+    //MARK: getExercise
+    //notTested
+    func getExercise(username: String, apiToken: String, completion: @escaping(Bool, String, [Exercise]) -> Void) {
+        
+        logging("getExercise API-Call wurde aufgerufen.")
+        
+        let urlString = "http://testapi.mediba.me/getExercise.php"
+        
+        guard let url = URL(string: urlString) else {
+            logging("Ungültige URL: \(urlString)")
+            completion(false, "Ungültige URL: '\(urlString)'", [])
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        let parameters = ["username": username, "apiToken": apiToken]
+        
+        do{
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            
+            request.httpBody = jsonData
+            
+            guard let postData = String(data: jsonData, encoding: .utf8) else {
+                logging("Fehler bei der Konvertierung der Parameter zu UTF8.")
+                completion(false, "Fehler bei der Konvertierung der Parameter zu UTF8.", [])
+                return
+            }
+            
+            logging("POST-Daten: \(postData)")
+            
+        } catch {
+            
+            logging("Fehler bei der Konvertierung der Parameter ins JSON-Format: \(error.localizedDescription)")
+            
+            completion(false, error.localizedDescription, [])
+            
+            return
+            
+        }
+        
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request) {
+            (data, response, error) in
+            
+            self.logging("getExercise-Call wurde ausgeführt.")
+            
+            if let error = error {
+                self.logging("Server hat einen Fehler zurück gegeben: \(error.localizedDescription)")
+                
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+                self.logging("API gibt Fehlercode: \(statusCode) zurück")
+                
+                completion(false, "Statuscode: \(statusCode)", [])
+                
+                return
+            }
+            
+            if let data = data {
+                
+                self.logging("(1/3) Server hat Daten übermittelt.")
+                self.logging("(2/3) Datensätze: \(data.count)")
+                
+                if let dataString = String(data: data, encoding: .utf8) {
+                    self.logging("(3/3) Empfangende Datan: \(dataString)")
+                }
+                
+                do{
+                    
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                       
+                        let success = json["success"] as? Bool,
+                        let error = json["error"] as? String,
+                       let exercise = json["exercise"] as? [Exercise] {
+                        self.logging("JSON-Daten wurden extrahiert")
+                        
+                        completion(success, error, exercise)
+                    }
+                    
+                } catch {
+                    
+                    self.logging("JSON-Daten wurden nich extrahiert.")
+                    
+                    completion(false, error.localizedDescription, [])
+                    
+                }
+            } else {
+                
+                self.logging("Server hat keine Daten übermittelt.")
+                
+                completion(false, "Keine Daten empfangen", [])
+                
+            }
+        }
+        task.resume()
+    }
+    
+    //MARK: getSet
+    //notTested
+    func getSet(username: String, apiToken: String, completion: @escaping(Bool, String, [Set]) -> Void) {
+        
+        logging("getSet API-Call wurde aufgerufen.")
+        
+        let urlString = "http://testapi.mediba.me/getSet.php"
+        
+        guard let url = URL(string: urlString) else {
+            logging("Ungültige URL: \(urlString)")
+            completion(false, "Ungültige URL: '\(urlString)'", [])
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        let parameters = ["username": username, "apiToken": apiToken]
+        
+        do{
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            
+            request.httpBody = jsonData
+            
+            guard let postData = String(data: jsonData, encoding: .utf8) else {
+                logging("Fehler bei der Konvertierung der Parameter zu UTF8.")
+                completion(false, "Fehler bei der Konvertierung der Parameter zu UTF8.", [])
+                return
+            }
+            
+            logging("POST-Daten: \(postData)")
+            
+        } catch {
+            
+            logging("Fehler bei der Konvertierung der Parameter ins JSON-Format: \(error.localizedDescription)")
+            
+            completion(false, error.localizedDescription, [])
+            
+            return
+            
+        }
+        
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request) {
+            (data, response, error) in
+            
+            self.logging("getSet-Call wurde ausgeführt.")
+            
+            if let error = error {
+                self.logging("Server hat einen Fehler zurück gegeben: \(error.localizedDescription)")
+                
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+                self.logging("API gibt Fehlercode: \(statusCode) zurück")
+                
+                completion(false, "Statuscode: \(statusCode)", [])
+                
+                return
+            }
+            
+            if let data = data {
+                
+                self.logging("(1/3) Server hat Daten übermittelt.")
+                self.logging("(2/3) Datensätze: \(data.count)")
+                
+                if let dataString = String(data: data, encoding: .utf8) {
+                    self.logging("(3/3) Empfangende Datan: \(dataString)")
+                }
+                
+                do{
+                    
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                       
+                        let success = json["success"] as? Bool,
+                        let error = json["error"] as? String,
+                       let set = json["set"] as? [Set] {
+                        self.logging("JSON-Daten wurden extrahiert")
+                        
+                        completion(success, error, set)
+                    }
+                    
+                } catch {
+                    
+                    self.logging("JSON-Daten wurden nich extrahiert.")
+                    
+                    completion(false, error.localizedDescription, [])
+                    
+                }
+            } else {
+                
+                self.logging("Server hat keine Daten übermittelt.")
+                
+                completion(false, "Keine Daten empfangen", [])
+                
+            }
+        }
+        task.resume()
+        
+    }
 }
