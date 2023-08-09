@@ -192,8 +192,8 @@ class APIManager: ObservableObject {
                 self.logging("Server hat keine Daten übermittelt.")
                 
                 DispatchQueue.main.async {
-                                completion(false, "Keine Daten empfangen.")
-                            }
+                    completion(false, "Keine Daten empfangen.")
+                }
                 
             }
         }
@@ -239,7 +239,7 @@ class APIManager: ObservableObject {
         //request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
-          
+            
             //Parameter dem httpBody übergeben
             request.httpBody = jsonData
             
@@ -339,7 +339,7 @@ class APIManager: ObservableObject {
                         completion(false, "Ungültige Daten erhalten")
                         
                         return
- 
+                        
                     }
                     
                 } catch {
@@ -505,21 +505,21 @@ class APIManager: ObservableObject {
          möglichen Optionen sind:
          
          - .fragmentsAllowed:       Erlaubt das Konvertieren von JSON-Fragmenten, wie einzelnen Werten,
-                                    anstelle eines vollständigen JSON-Objekts oder -Arrays.
+         anstelle eines vollständigen JSON-Objekts oder -Arrays.
          - .sortedKeys:             Sortiert die Schlüssel im generierten JSON alphabetisch.
          - .prettyPrinted:          Fügt zusätzliche Leerraum- und Einzüge hinzu, um das generierte JSON
-                                    lesbarer zu machen.
+         lesbarer zu machen.
          - .withoutEscapingSlashes: Deaktiviert das Escapen von Schrägstrichen ("/") im generierten JSON.
          - .writingOptions:         Eine Reihe von Schreiboptionen, die die JSON-Ausgabe anpassen können.
          Zum Beispiel:
          - .sortedKeys:             Sortiert die Schlüssel im generierten JSON
-                                    alphabetisch.
+         alphabetisch.
          - .prettyPrinted:          Fügt zusätzliche Leerraum- und Einzüge hinzu, um
-                                    das generierte JSON lesbarer zu machen.
+         das generierte JSON lesbarer zu machen.
          - .fragmentsAllowed:       Erlaubt das Konvertieren von Fragmenten.
          - .withoutEscapingSlashes: Deaktiviert das Escapen von Schrägstrichen ("/").
          - .readingOptions:         Eine Reihe von Lesemöglichkeiten für die JSON-Eingabe.
-                                    Zum Beispiel:
+         Zum Beispiel:
          - .mutableContainers:       Erstellt mutable (veränderbare) Container für
          JSON-Objekte und -Arrays anstelle von
          unveränderlichen (immutable) Versionen.
@@ -590,7 +590,7 @@ class APIManager: ObservableObject {
                         //extrahierte Daten werden in Variablen gespeichert und dann die
                         //Completion-Closure der checkEmail-Funktion weiter gegeben.
                         let eexists = json["exists"] as? Bool,
-                        let emessage = json["message"] as? String {
+                       let emessage = json["message"] as? String {
                         
                         //Ausgabe zum Debuggen:
                         self.logging("JSON-Daten wurden extrahiert")
@@ -733,7 +733,7 @@ class APIManager: ObservableObject {
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                        
                         let verify = json["verify"] as? Bool,
-                        let apitoken = json["apitoken"] as? String {
+                       let apitoken = json["apitoken"] as? String {
                         
                         self.logging("JSON-Daten wurden extrahiert.")
                         
@@ -777,6 +777,110 @@ class APIManager: ObservableObject {
         print("checkfunccall wurde aufgerufen")
         let message = "Die Funktion wurde aufgerufen und gibt true zurück!"
         completion(true, message)
+    }
+    
+    //MARK: getTraining
+    func getTraining(username: String, apiToken: String, completion: @escaping(Bool, String, [Training]) -> Void) {
+        logging("getTraining API-Call wurde aufgerufen.")
+        
+        let urlString = "http://testapi.mediba.me/getTraining.php"
+        
+        guard let url = URL(string: urlString) else {
+            logging("Ungültige URL: \(urlString)")
+            completion(false, "Ungültige URL: '\(urlString)'", [])
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        let parameters = ["username": username, "apiToken": apiToken]
+        
+        do{
+            let jsonData = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            
+            request.httpBody = jsonData
+            
+            guard let postData = String(data: jsonData, encoding: .utf8) else {
+                logging("Fehler bei der Konvertierung der Parameter zu UTF8.")
+                completion(false, "Fehler bei der Konvertierung der Parameter zu UTF8.", [])
+                return
+            }
+            
+            logging("POST-Daten: \(postData)")
+            
+        } catch {
+            
+            logging("Fehler bei der Konvertierung der Parameter ins JSON-Format: \(error.localizedDescription)")
+            
+            completion(false, error.localizedDescription, [])
+            
+            return
+            
+        }
+        
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request) {
+            (data, response, error) in
+            
+            self.logging("getTraining-Call wurde ausgeführt.")
+            
+            if let error = error {
+                self.logging("Server hat einen Fehler zurück gegeben: \(error.localizedDescription)")
+                
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
+                self.logging("API gibt Fehlercode: \(statusCode) zurück")
+                
+                completion(false, "Statuscode: \(statusCode)", [])
+                
+                return
+            }
+            
+            if let data = data {
+                
+                self.logging("(1/3) Server hat Daten übermittelt.")
+                self.logging("(2/3) Datensätze: \(data.count)")
+                
+                if let dataString = String(data: data, encoding: .utf8) {
+                    self.logging("(3/3) Empfangende Datan: \(dataString)")
+                }
+                
+                do{
+                    
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                       
+                        let success = json["success"] as? Bool,
+                        let error = json["error"] as? String,
+                       let training = json["training"] as? [Training] {
+                        self.logging("JSON-Daten wurden extrahiert")
+                        
+                        completion(success, error, training)
+                    }
+                    
+                } catch {
+                    
+                    self.logging("JSON-Daten wurden nich extrahiert.")
+                    
+                    completion(false, error.localizedDescription, [])
+                    
+                }
+            } else {
+                
+                self.logging("Server hat keine Daten übermittelt.")
+                
+                completion(false, "Keine Daten empfangen", [])
+                
+            }
+        }
+        task.resume()
     }
     
 }

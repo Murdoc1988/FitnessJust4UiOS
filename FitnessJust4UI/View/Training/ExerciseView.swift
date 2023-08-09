@@ -8,8 +8,30 @@
 import SwiftUI
 
 struct ExerciseView: View {
+    @ObservedObject private var tvm = TrainingsViewModel()
+    @State var exerciseList: [String]
+    
+    init(){
+        self.exerciseList = TrainingsViewModel().exerciseList
+    }
+
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack{
+            List{
+                ForEach(exerciseList, id: \.self) { exercise in
+                    NavigationLink(destination: RepsView()) {
+                        LEExercise()
+                    }
+                    
+                }
+                NEWExercise()
+            }
+            .navigationTitle("TrainingXY")
+            //NEWExercise()
+        }
+        .padding(.top, 0)
+        .padding(.horizontal, 0)
     }
 }
 

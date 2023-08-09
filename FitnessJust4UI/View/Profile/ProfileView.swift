@@ -64,8 +64,23 @@ struct ProfileView: View {
                     switch categories[pageIndex] {
                     case "User":
                         TextEdit(labelText: "Firstname", userDefault: "pfname")
+                        
                         TextEdit(labelText: "Lastname", userDefault: "plname")
+                        
                         TextEdit(labelText: "Mail", userDefault: "pmail")
+                        
+                        Button(action: {
+                            //TODO: Logout Funktion implementieren
+                        }) {
+                            Text("Logout")
+                                .padding()
+                                .background(.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                        
+                        
+                        
                     case "Mesurement":
                         ToggleView(labelText: "Weight", userDefault: "isWeight", periodOneUD: "periodOneWeight", periodTwoUD: "periodTwoWeight")
                         ToggleView(labelText: "Water", userDefault: "isWater", periodOneUD: "periodOneWater", periodTwoUD: "periodTwoWater")

@@ -24,7 +24,7 @@ struct NEWTraining: View {
                 Button(action: {
                                 // Action to be performed when the button is tapped
                             }) {
-                                Text("eintragen")
+                                Text("save")
                                     .font(.body)
                                     .foregroundColor(.white)
                                     .padding(8)

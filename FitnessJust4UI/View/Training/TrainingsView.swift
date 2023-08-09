@@ -8,22 +8,28 @@
 import SwiftUI
 
 struct TrainingsView: View {
+    @ObservedObject private var tvm = TrainingsViewModel()
+    @State var trainingsList: [String]
+    
+    init(){
+        self.trainingsList = TrainingsViewModel().trainingsList
+    }
     var body: some View {
         
-        List{
-            VStack{
-                LETraining()
-                LETraining()
-                LETraining()
-                LETraining()
-                LETraining()
-                LETraining()
-                LETraining()
-                LETraining()
+        NavigationStack{
+            List{
+                ForEach(trainingsList, id: \.self) { training in
+                    NavigationLink(destination: ExerciseView()) {
+                        LETraining()
+                    }
+                    
+                }
                 NEWTraining()
             }
-            .padding(.top, 0)
-            .padding(.horizontal, 0)
+            .navigationTitle("Deine Trainingsliste")
+            
+            //NEWTraining()
+            
         }
         .padding(.top, 0)
         .padding(.horizontal, 0)

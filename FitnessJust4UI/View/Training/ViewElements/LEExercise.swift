@@ -8,8 +8,30 @@
 import SwiftUI
 
 struct LEExercise: View {
+    @State var training = "Exercise"
+    @State var exerices = 4
+    @State var time = 18
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack(alignment: .leading){
+            
+            HStack{
+                Text("\(training)")
+                    .font(.system(size: 24, weight: .bold))
+                Spacer()
+            }
+            
+            Text("\(exerices) Sets")
+            
+            Text("ca. \(time) min")
+            
+            //Divider()
+            
+        }
+        .padding([.leading, .trailing], 8)
+        .padding([.top, .bottom], 4)
+        
+        
+        
     }
 }
 

@@ -20,14 +20,14 @@ struct LETraining: View {
                 Spacer()
             }
             
-            Text("\(exerices) Übungen")
+            Text("\(exerices) Exercises")
             
             Text("ca. \(time) min")
             
-            Divider()
+            //Divider()
             
         }
-        .padding([.leading, .trailing], 32)
+        .padding([.leading, .trailing], 8)
         .padding([.top, .bottom], 4)
         
         

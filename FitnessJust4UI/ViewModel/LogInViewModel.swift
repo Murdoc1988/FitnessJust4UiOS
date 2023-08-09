@@ -26,7 +26,7 @@ class LogInViewModel: ObservableObject {
         apiManager.authUser(username: username, password: password) {
             verify, apiToken in
             
-            //Im Hauptstread ausführenm, damit erst nach API-Ende die Werte
+            //Im Hauptstread ausführen, damit erst nach API-Ende die Werte
             //übernommen werden und wenn alle Werte gesetzt wurden, die View
             //aktualisiert wird (Die Main-Queue ist der Thread, auf dem die
             //Benutzeroberfläche in den meisten App-Frameworks aktualisiert
@@ -41,7 +41,7 @@ class LogInViewModel: ObservableObject {
                 
                 if self.verify {
                     
-                    
+                    UserDefaults.standard.set(apiToken, forKey: apiToken)
                     
                 } else {
                     
