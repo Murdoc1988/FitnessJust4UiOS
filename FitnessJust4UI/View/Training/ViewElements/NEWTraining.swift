@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct NEWTraining: View {
+    @EnvironmentObject private var tvm : TrainingsViewModel
     @State var training = ""
     var body: some View {
         VStack(alignment: .leading){
@@ -22,7 +23,11 @@ struct NEWTraining: View {
             HStack{
                 Spacer()
                 Button(action: {
-                                // Action to be performed when the button is tapped
+                    if(!training.isEmpty){
+                        tvm.addTraining(training: Training(tid: 0, tname: training, tdesc: "Beschreibung", tdate: "2023-08-10", tecount: 5))
+                        self.training = ""
+                        //tvm.getTraining()
+                    }
                             }) {
                                 Text("save")
                                     .font(.body)
@@ -31,6 +36,8 @@ struct NEWTraining: View {
                                     .background(Color.deepPurple)
                                     .cornerRadius(10)
                             }
+                
+                
             }
             
             

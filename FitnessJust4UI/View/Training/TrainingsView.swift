@@ -8,31 +8,32 @@
 import SwiftUI
 
 struct TrainingsView: View {
-    @ObservedObject private var tvm = TrainingsViewModel()
-    //var trainingsList: [Training]
+    @EnvironmentObject var tvm : TrainingsViewModel
     
     //init(){
-      //  self.trainingsList = TrainingsViewModel().trainingsList
+    //  self.trainingsList = TrainingsViewModel().trainingsList
     //}
     var body: some View {
         
         NavigationStack{
             List{
                 ForEach(tvm.trainingsList, id: \.self) { training in
-                    NavigationLink(destination: ExerciseView()) {
-                        LETraining(training: training.tname, exerices: 18, time: 60)
+                    NavigationLink(destination: ExerciseView(tid: training.tid).environmentObject(tvm)) {
+                        LETraining(training: training.tname, exerices: training.tecount, time: 60)
                     }
                     
                 }
                 NEWTraining()
             }
             .navigationTitle("Deine Trainingsliste")
+            .id(tvm.trainingsList)
             
             //NEWTraining()
             
         }
         .padding(.top, 0)
         .padding(.horizontal, 0)
+        .environmentObject(tvm)
     }
 }
 

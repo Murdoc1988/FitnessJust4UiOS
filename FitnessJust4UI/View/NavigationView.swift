@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NavigationView: View {
     @State private var selectedTab = 2
+    @StateObject var tvm = TrainingsViewModel()
 
        var body: some View {
            VStack(spacing: 0) {
@@ -17,6 +18,7 @@ struct NavigationView: View {
                    VStack{
                        TrainingsView()
                            .padding(0)
+                           .environmentObject(tvm)
                    }
                    .padding(0)
                case 1:
@@ -60,6 +62,8 @@ struct NavigationView: View {
                }
                .padding(8)
            }
+           .navigationBarBackButtonHidden(true)
+           .navigationTitle(tabTitle(selectedTab))
        }
        
        func tabImageName(_ index: Int) -> String {

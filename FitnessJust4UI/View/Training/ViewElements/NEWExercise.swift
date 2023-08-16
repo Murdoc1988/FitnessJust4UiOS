@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct NEWExercise: View {
-    @State var training = ""
+    @EnvironmentObject private var tvm : TrainingsViewModel
+    @State var ename = ""
+    @State var e_tid = 0
     var body: some View {
         VStack(alignment: .leading){
             HStack{
-                TextField("Exercise", text: $training)
+                TextField("Exercise", text: $ename)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 120)
                     .padding(.trailing, 0)
@@ -22,8 +24,11 @@ struct NEWExercise: View {
             HStack{
                 Spacer()
                 Button(action: {
-                                // Action to be performed when the button is tapped
-                            }) {
+                    if(!ename.isEmpty){
+                       tvm.addExercise(exercise: Exercise(eid: 0, ename: ename, edesc: "", eprimusc: "Bizeps", esecmusc: "Trizeps", edate: "", e_tid: e_tid, recount: 0))
+                        tvm.getExercise(tid: e_tid)
+                        self.ename = ""
+                    }}) {
                                 Text("save")
                                     .font(.body)
                                     .foregroundColor(.white)

@@ -50,6 +50,10 @@ class RegistrationViewModel: ObservableObject {
     @Published var showHint = false
     @Published var hints: [HintText] = []
 
+    //Für API-Calls
+    @Published var success = false
+    @Published var error = ""
+    
     //logging for Debugging
     public let logging: (String) -> Void = { message in
         
@@ -557,5 +561,15 @@ class RegistrationViewModel: ObservableObject {
             
         }
         
+    }
+    
+    func regUser(){
+        
+        self.apiManager.getRegistration(username: self.username, mail: self.mail, password: self.firstPassword) {success, error in
+            
+            self.success = success
+            self.error = error
+            
+        }
     }
 }

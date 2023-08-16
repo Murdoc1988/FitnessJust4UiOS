@@ -29,7 +29,7 @@ struct Reg01View: View {
                 List{
                     
                     VStack{
-                
+                        
                         //MARK: INPUT Benutzername
                         TextField("Benutzername", text: $rvm.username)
                             .autocapitalization(.none)              //damit nicht direkt mit einem Großbuchstaben begonnen wird
@@ -44,7 +44,7 @@ struct Reg01View: View {
                                 rvm.checkUsername()                 //APICall und Auswertung
                                 
                             }
-                            //TODO: Schönere Variante für den Hint
+                        //TODO: Schönere Variante für den Hint
                             .alert(isPresented: $rvm.showAlert) {
                                 Alert(
                                     title: Text(rvm.alertTitle),
@@ -161,27 +161,41 @@ struct Reg01View: View {
                             
                             Spacer()
                             
-                            if rvm.allValid {
-                                NavigationLink("Next", destination: Reg02View())
-                            } else {
-                                Text("Next")
-                                    .foregroundColor(.gray)
+                            /*
+                             if rvm.allValid {
+                             NavigationLink("Next", destination: Reg02View())
+                             } else {
+                             Text("Next")
+                             .foregroundColor(.gray)
+                             }
+                             */
+                            Button("Registrieren") {
+                                rvm.regUser()
                             }
+                            .disabled(!rvm.allValid)
+                            
+                            NavigationLink("", destination: LoginView(), isActive: $rvm.success)
+                                               .opacity(0)
+                            
                             
                         }
                         .padding(.trailing, 32)
                     }
                     .navigationBarTitle("Registration")
                 }
+                
+                
+                
             }
             if(rvm.showHint){
                 HintBubble(texts: rvm.hints)
                     .padding(.top, rvm.hintPosition)
             }
-                
+            
         }
     }
 }
+
 struct Reg01View_Previews: PreviewProvider {
     static var previews: some View {
         Reg01View()

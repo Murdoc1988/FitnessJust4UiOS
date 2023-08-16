@@ -19,6 +19,9 @@ class StarterViewModel: ObservableObject{
         //Hier wird geprüft,
         //TODO:  -nicht eingeloggt ist (leere shared Preferences)
         //       return 1
+        if let _ = UserDefaults.standard.string(forKey: "username") {
+            return 1
+        }
         //TODO:  -passwort abgelaufen ist (shared Preferences)
         //       return 2
         //TODO: -AppVersion - neue App Version ist verfügbar
@@ -29,9 +32,6 @@ class StarterViewModel: ObservableObject{
         
         //TODO:  -ob Nutzer bereits eingeloggt ist (shared Preferences)
         //       return 0
-        if let _ = UserDefaults.standard.string(forKey: "username") {
-            return 1
-        }
         
         return 20
     }

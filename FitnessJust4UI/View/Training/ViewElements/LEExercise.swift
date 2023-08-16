@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct LEExercise: View {
-    @State var training = "Exercise"
+    @State var ename = "Exercise"
     @State var exerices = 4
     @State var time = 18
     var body: some View {
         VStack(alignment: .leading){
             
             HStack{
-                Text("\(training)")
+                Text("\(ename)")
                     .font(.system(size: 24, weight: .bold))
                 Spacer()
             }

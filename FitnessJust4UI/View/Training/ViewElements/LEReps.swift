@@ -22,6 +22,11 @@ struct LEReps: View {
     @State var pause = 120
     @State var time = 0
     @State var active = true
+    
+    init(rep: Rep){
+        self.oWeight = rep.rweight
+        self.oRep = rep.rreps
+    }
     var body: some View {
         
         VStack{
@@ -82,6 +87,7 @@ struct LEReps: View {
             .padding(.horizontal, 16)
             .foregroundColor(.black)
             .font(.system(size: 20, weight: .bold))
+            .onAppear()
             
             
             
@@ -97,11 +103,5 @@ struct LEReps: View {
         }
         .padding(.vertical, 8)
         
-    }
-}
-
-struct LEReps_Previews: PreviewProvider {
-    static var previews: some View {
-        LEReps()
     }
 }

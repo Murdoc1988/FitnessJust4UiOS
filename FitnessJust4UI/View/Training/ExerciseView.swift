@@ -8,35 +8,36 @@
 import SwiftUI
 
 struct ExerciseView: View {
-    @ObservedObject private var tvm = TrainingsViewModel()
-    @State var exerciseList: [String]
+    @EnvironmentObject var tvm : TrainingsViewModel
+    var tid: Int
     
-    init(){
-        self.exerciseList = TrainingsViewModel().exerciseList
-    }
-
     
     var body: some View {
         NavigationStack{
             List{
-                ForEach(exerciseList, id: \.self) { exercise in
-                    NavigationLink(destination: RepsView()) {
-                        LEExercise()
+                ForEach(tvm.exerciseList, id: \.self) { exercise in
+                    NavigationLink(destination: RepsView(eid: exercise.eid).environmentObject(tvm)) {
+                        LEExercise(ename: exercise.ename, exerices: exercise.recount, time: 18)
                     }
                     
                 }
-                NEWExercise()
+                NEWExercise(ename: "", e_tid: tid)
             }
             .navigationTitle("TrainingXY")
-            //NEWExercise()
+            .id(tvm.exerciseList)
         }
         .padding(.top, 0)
         .padding(.horizontal, 0)
+        .environmentObject(tvm)
+        .onAppear{
+            tvm.getExercise(tid: tid)
+        }
     }
 }
-
-struct ExerciseView_Previews: PreviewProvider {
-    static var previews: some View {
-        ExerciseView()
-    }
-}
+/*
+ struct ExerciseView_Previews: PreviewProvider {
+ static var previews: some View {
+ ExerciseView()
+ }
+ }
+ */

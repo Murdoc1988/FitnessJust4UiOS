@@ -10,8 +10,12 @@ import SwiftUI
 
 class LogInViewModel: ObservableObject {
     @ObservedObject private var apiManager = APIManager()
-    private var verify = false           //Rückgabewert der API, ob der Nutzername existiert
+    @Published var verify = false           //Rückgabewert der API, ob Nutzer angemeldet ist
+    @Published var username = ""
+    @Published var password = ""
     private var apiToken = ""
+    private var error = ""
+    
     
     public let logging: (String) -> Void = { message in
         
@@ -21,19 +25,16 @@ class LogInViewModel: ObservableObject {
         
     }
     
-    func authUser(username: String, password: String){
+    func authUser(){
         
-        apiManager.authUser(username: username, password: password) {
-            verify, apiToken in
+        apiManager.getAuth(username: self.username, password: self.password) {
+            verify, error, apiToken in
             
-            //Im Hauptstread ausführen, damit erst nach API-Ende die Werte
-            //übernommen werden und wenn alle Werte gesetzt wurden, die View
-            //aktualisiert wird (Die Main-Queue ist der Thread, auf dem die
-            //Benutzeroberfläche in den meisten App-Frameworks aktualisiert
-            //wird.)
             DispatchQueue.main.async {
                 
                 self.verify = verify
+                print("\(self.verify)")
+                self.error = error
                 
                 self.apiToken = apiToken
                 
@@ -41,7 +42,8 @@ class LogInViewModel: ObservableObject {
                 
                 if self.verify {
                     
-                    UserDefaults.standard.set(apiToken, forKey: apiToken)
+                    UserDefaults.standard.set(apiToken, forKey: "apiToken")
+                    UserDefaults.standard.set(self.username, forKey: "username")
                     
                 } else {
                     

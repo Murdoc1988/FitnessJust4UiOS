@@ -14,7 +14,7 @@ struct MeasurementView: View {
             NewMesurement(labelText:"Weight", userDefault: "CurrentWeight", unit: "Kg")
             NewMesurement(labelText:"Water", userDefault: "CurrentWater", unit: "%")
             NewMesurement(labelText: "Muscle", userDefault: "CurrentMuscle", unit: "%")
-        }
+        }.navigationBarTitle("Mesurement")
         
     }
 }

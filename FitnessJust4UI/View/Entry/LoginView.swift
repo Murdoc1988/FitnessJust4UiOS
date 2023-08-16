@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LoginView: View {
     
+    @ObservedObject private var lvm = LogInViewModel()
+    
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var showError: Bool = false
@@ -17,50 +19,60 @@ struct LoginView: View {
     @State private var spapitoken: String = ""
     
     var body: some View {
-        VStack {
-            TextField("Username", text: $username)
-                .padding()
-                .autocapitalization(.none)
-            
-            SecureField("Password", text: $password)
-                .padding()
-            
-            Button(action: {
-                authenticateUser()
-            }) {
-                Text("Login")
-                    .foregroundColor(.white)
+        
+        
+        NavigationStack{
+            VStack {
+                TextField("Username", text: $lvm.username)
                     .padding()
-                    .background(Color.blue)
-                    .cornerRadius(10)
-            }
-            VStack{
-                if(spusername != ""){
-                    Text("SP Username: \(spusername)")
+                    .autocapitalization(.none)
+                
+                SecureField("Password", text: $lvm.password)
+                    .padding()
+                
+                Button(action: {
+                    //authenticateUser()
+                    lvm.authUser()
+                }) {
+                    Text("Login")
+                        .foregroundColor(.white)
                         .padding()
-                        .font(.system(size: 12))
-                    Text("SP Token: \(spapitoken)")
-                        .padding()
-                        .font(.system(size: 12))
+                        .background(Color.blue)
+                        .cornerRadius(10)
                 }
+                VStack{
+                    if(spusername != ""){
+                        Text("SP Username: \(spusername)")
+                            .padding()
+                            .font(.system(size: 12))
+                        Text("SP Token: \(spapitoken)")
+                            .padding()
+                            .font(.system(size: 12))
+                    }
+                }
+                .frame(height: 120)
             }
-            .frame(height: 120)
+            .padding()
+            
+            //.alert(isPresented: $showError) {
+              //  Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
+            //}
+            NavigationLink("", destination: NavigationView(), isActive: $lvm.verify)
+                .opacity(0)
+            
         }
-        .padding()
-        .alert(isPresented: $showError) {
-            Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .default(Text("OK")))
-        }
+        .navigationBarBackButtonHidden(true)
     }
     
+    
     func authenticateUser() {
-        APIManager.shared.authUser(username: username, password: password) { success, message in
+        APIManager.shared.getAuth(username: lvm.username, password: lvm.password) { success, message, apiToken in
             if success {
-                // Authentifizierung erfolgreich, zur HomeView weiterleiten
-                // Hier kannst du die Navigation zur HomeView implementieren
-                // Beispiel: navigationLink(destination: HomeView()) { ... }
                 
-                UserDefaults.standard.set(message, forKey: "apiToken")
-                UserDefaults.standard.set(username, forKey: "username")
+                lvm.verify = success
+                
+                UserDefaults.standard.set(apiToken, forKey: "apiToken")
+                UserDefaults.standard.set(lvm.username, forKey: "username")
                 
                 if  let uwapiToken = UserDefaults.standard.string(forKey: "apiToken"),
                     let uwusername = UserDefaults.standard.string(forKey: "username") {
@@ -81,9 +93,9 @@ struct LoginView: View {
                 showError = true
             }
         }
+        
     }
 }
-
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()

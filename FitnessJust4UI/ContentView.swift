@@ -13,11 +13,11 @@ struct ContentView: View {
         //AppVersionView()
         //LoginView()
         //EntryPoint()
-        //Reg01View()
+        Reg01View()
         //HomeView()
         //TrainingsView()
         //ProfileView()
-        NavigationView()
+        //NavigationView()
     }
 }
 
